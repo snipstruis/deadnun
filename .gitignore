@@ -1,0 +1,7 @@
+*
+!.gitignore
+!main.tex
+!main.pdf
+!Makefile
+!*/
+
