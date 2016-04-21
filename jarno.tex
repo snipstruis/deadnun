@@ -1,4 +1,4 @@
-\section{front-end}
+\section{Front-end}
 
 \frame{
     \frametitle{Front-end}
@@ -51,20 +51,13 @@
     \end{figure}
 }
 
-\subsection{Order of the front-end}
-
-\frame{
-    \frametitle{Order of the front-end}
-    Parsing $\longrightarrow$ Type-checking $\longrightarrow$ Normalizing $\longrightarrow$ Back-end
-
-    Parsing $\longrightarrow$ Normalizing $\longrightarrow$ Type-checking  $\longrightarrow$ Back-end
-}
 
 \subsection{Moving functionality from the type-checker to the parser}
 
 \frame{
     \frametitle{Moving functionality from the type-checker to the parser}
     \begin{enumerate}
+    \item Order of the front-end
     \item Identification of variable kind's
     \item Identification of function names
     \item Detection of partial application
@@ -73,7 +66,12 @@
 
 }
 
-\subsubsection{Identification of variable kind's}
+\frame{
+    \frametitle{Order of the front-end}
+    Parsing $\longrightarrow$ Type-checking $\longrightarrow$ Normalizing $\longrightarrow$ Back-end
+
+    Parsing $\longrightarrow$ Normalizing $\longrightarrow$ Type-checking  $\longrightarrow$ Back-end
+}
 
 \frame{
     \frametitle{Identification of variable kind's}
@@ -86,8 +84,6 @@
     \item Kind has a sharp before its variable name. Example (\#kind, \#module, \#term, \#type)
     \end{itemize}
 }
-
-\subsubsection{Identification of function names}
 
 \begin{frame}[fragile]
     \frametitle{Identification of function names}
@@ -109,8 +105,23 @@
 
 \end{frame}
 
-\frame{
+\begin{frame}[fragile]
     \frametitle{Detection of partial application}   
     
+    \begin{lstlisting}
+    Func "add" -> int -> int -> int
+    Func "foo" -> int -> int -> int
+    add -> a0
+    a0 x -> a1
+    a1 y -> res
+    -------
+    foo x y -> res
+    \end{lstlisting}
+    \begin{lstlisting}
+    a0 = int -> int -> int
+    a1 = int -> int
+    res = int
+    \end{lstlisting}
 
-}
+
+\end{frame}
