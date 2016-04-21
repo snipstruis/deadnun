@@ -1,18 +1,22 @@
-\section{MC}
+\section{Intro}
 \subsection{Goal}
 \frame{%
    \frametitle{\subsecname}
-   why MC?
+   \framesubtitle{Why MC}
+   Complexity Casanova\\
+   MC is the solution
 }
 \frame{%
    \frametitle{\subsecname}
-   Goal of MC
+   \framesubtitle{Goal of MC}
+   MC adds abstraction\\
+   Implementing Casanova
 }
-
 
 \subsection{MC basics}
 \frame{%
    \frametitle{\subsecname}
+   \framesubtitle{Overview}
 
    \begin{itemize}
       \item Data
@@ -22,16 +26,59 @@
       \item Module
    \end{itemize}
 }
-\frame{%
-   \frametitle{\subsecname}
-   show how bar and premises work
-}
-\frame{%
-   \frametitle{\subsecname}
-   show how modules work
-}
 
-\subsection{Usecases}
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{Data}
+
+   \begin{lstlisting}
+Data "Left"  -> string -> string | float
+Data "Right" -> float  -> string | float
+   \end{lstlisting}
+   Constructs and Deconstructs types
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{Func}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Creates a runtime function
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{TypeFunc}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Creates a compile time function and is able to create kinds
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{TypeAlias}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Constructs and Deconstructs kinds
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{Module}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Defines an interface
+\end{frame}
+
+\subsection{Usecases in short}
 \frame{%
    \frametitle{\subsecname}
    \begin{itemize}
@@ -39,16 +86,16 @@
       \item Complex structures
       \item Freedom with control
    \end{itemize}
-
 }
 
+\section{MC standardlibrary}
 \subsection{Monad Transformers}
 \subsubsection{Monads}
-\frame{%
-   explain mathematical
-   endofunctors
-   monoid
-}
+% \frame{%
+% explain mathematical
+% endofunctors
+% monoid
+% }
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{\subsubsecname}
@@ -61,25 +108,35 @@
             \item Two functions
          \end{itemize}
       \item Different Monads
-      \item Combining Monads
          \begin{itemize}
-            \item By hand
-            \item Error prone
+            \item State
+            \item Maybe
          \end{itemize}
    \end{itemize}
 }
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+
+   Parser monad $\Longrightarrow$ State monad $\longrightarrow$ Maybe Monad \\
+   \vspace{\baselineskip}
+
+   Combining Monads:\\
+   \begin{itemize}
+      \item By hand
+      \item Error prone
+   \end{itemize}
+}
+
 \subsubsection{Transformers}
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{\subsubsecname}
 
    \begin{itemize}
-      \item Combining monads
-         \begin{itemize}
-            \item Automatic
-            \item
-         \end{itemize}
-      \item Id monad transformer
+      \item Automatically combines monads
+      \item Id monad
    \end{itemize}
 }
 
@@ -124,8 +181,8 @@
    \end{enumerate}
 
 }
-\subsection{Coroutines}
-\frame{%
-   \frametitle{\subsecname}
+% \subsection{Coroutines}
+% \frame{%
+% \frametitle{\subsecname}
 
-}
+% }
