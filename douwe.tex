@@ -3,6 +3,11 @@
 \subsection{Code Generation}
 
 \begin{frame}
+    \frametitle{Back-end}
+    The backend is responsible for creating an executable
+\end{frame}
+
+\begin{frame}
     \frametitle{Goals}
     \begin{enumerate}
     \item generate executable code from the typechecked AST
@@ -10,25 +15,6 @@
     \item embed an interactive debugger in the executable
     \end{enumerate}
 \end{frame}
-
-\begin{frame}
-    \frametitle{\subsecname}
-    \framesubtitle{The AST}
-    \begin{itemize}
-    \item The interface between the front-end and the back-end
-    \item Contains
-        \begin{itemize}
-        \item All the functions
-        \item All the data declarations
-        \item All the lambdas
-        \item The “main” function
-        \item The compiler flags
-        \end{itemize}
-    \item All types are already inferenced and typechecked
-    \item All generics are already reified/concrete
-    \end{itemize}
-\end{frame}
-
 
 \begin{frame}
     \frametitle{\subsecname}
@@ -58,9 +44,9 @@
     \begin{tabular}{l|l|l}
         & multi-platform & speed \\
         \hline
-        P/Invoke      & on x86     & high overhead \\
-        hosted        & on windows & no high-speed JIT \\
-        generated DLL & on windows & very high overhead \\
+        P/Invoke      & not on mobile & control flow with .Net\\
+        wrapper DLL   & windows only  & very high overhead \\
+        hosted        & windows only  & no high-speed JIT \\
     \end{tabular}
 
     \begin{itemize}
@@ -73,7 +59,7 @@
     \framesubtitle{Managed solutions}
 
     \begin{itemize}
-        \item Higher reliability
+        \item High reliability, no hybrid constructs
         \item Uses the fast .Net garbage collector
     \end{itemize}
 
@@ -81,8 +67,8 @@
         & multi-platform & speed & other\\
         \hline
         C++/CLI & on windows & fast & horrible in every way\\
-        CIL     & everywhere & fast & difficult to debug\\
         F\#     & everywhere & slow & resists imperative code\\
+        CIL     & everywhere & fast & difficult to debug\\
         C\#     & everywhere & fast & Most supported compiler\\
     \end{tabular}
 
@@ -93,24 +79,47 @@
 
 \begin{frame}
     \frametitle{\subsecname}
-    \framesubtitle{Mangler}
+    \framesubtitle{The AST}
     \begin{itemize}
-        \item Transforms valid Mc identifiers to valid C\# identifiers
+    \item The interface between the front-end and the back-end
+    \item Contains
+        \begin{itemize}
+        \item All the functions
+        \item All the data declarations
+        \item The “main” function
+        \item The compiler flags
+        \end{itemize}
+    \item All types are already inferenced and typechecked
+    \item All generics are already reified/concrete
     \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{\subsecname}
-    \framesubtitle{Data structure generation}
+    \framesubtitle{Mangler}
+    \begin{itemize}
+        \item Transforms valid Mc identifiers to valid C\# identifiers
+        \item The escape character is underscore
+        \item \verb/!/ becomes \verb/_bang/, \verb/|/ becomes \verb/_pipe/, \verb/_/ becomes \verb/_under/
+        \item C\# keywords are prefixed with @. @if, @int, etc.
+        \item Non-ascii symbols are converted to utf-8 NFD.\\
+              $\vcenter{\hbox{\includegraphics[height=1.5em]{snowman}}}$ becomes \verb/_E2_98_83/
+        \item Type information is also suffixed with \verb/_T/, \verb/_L/ and \verb/_R/.\\
+            (list(list int)) becomes \verb/_Llist_Llist_Tint_R_R/
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{\subsecname}
+    \framesubtitle{Rule structure}
+    Normalized instructions.
     \begin{lstlisting}
-Data "Left"  -> string -> string | float
-Data "Right" -> float  -> string | float
-    \end{lstlisting}
-    
-    \begin{lstlisting}
-Class _pipe {};
-Class _Left :_pipe {string _arg0;};
-Class _Right:_pipe {float  _arg0;};
+-------------
+count [] -> 0
+
+count xs -> res
+--------------------
+count x::xs -> res+1
     \end{lstlisting}
 \end{frame}
 
@@ -134,6 +143,21 @@ Class MyFunc {
         throw exception
     }
 };
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{\subsecname}
+    \framesubtitle{Data structure generation}
+    \begin{lstlisting}
+Data "Left"  -> string -> string | float
+Data "Right" -> float  -> string | float
+    \end{lstlisting}
+    
+    \begin{lstlisting}
+Class _pipe {};
+Class _Left :_pipe {string _arg0;};
+Class _Right:_pipe {float  _arg0;};
     \end{lstlisting}
 \end{frame}
 
