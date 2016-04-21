@@ -108,25 +108,35 @@ Data "Right" -> float  -> string | float
             \item Two functions
          \end{itemize}
       \item Different Monads
-      \item Combining Monads
          \begin{itemize}
-            \item By hand
-            \item Error prone
+            \item State
+            \item Maybe
          \end{itemize}
    \end{itemize}
 }
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+
+   Parser monad $\Longrightarrow$ State monad $\longrightarrow$ Maybe Monad \\
+   \vspace{\baselineskip}
+
+   Combining Monads:\\
+   \begin{itemize}
+      \item By hand
+      \item Error prone
+   \end{itemize}
+}
+
 \subsubsection{Transformers}
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{\subsubsecname}
 
    \begin{itemize}
-      \item Combining monads
-         \begin{itemize}
-            \item Automatic
-            \item
-         \end{itemize}
-      \item Id monad transformer
+      \item Automatically combines monads
+      \item Id monad
    \end{itemize}
 }
 
@@ -173,6 +183,6 @@ Data "Right" -> float  -> string | float
 }
 % \subsection{Coroutines}
 % \frame{%
-   % \frametitle{\subsecname}
+% \frametitle{\subsecname}
 
 % }
