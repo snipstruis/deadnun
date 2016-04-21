@@ -25,7 +25,7 @@
         \item The compiler flags
         \end{itemize}
     \item All types are already inferenced and typechecked
-    \item All generics are already reified. All types are concrete
+    \item All generics are already reified/concrete
     \end{itemize}
 }
 
@@ -33,6 +33,28 @@
 \frame{%
     \frametitle{\subsecname}
     \framesubtitle{Output Language}
+    Hard requirements
+    \begin{itemize}
+    \item Must inter-operate with .Net
+    \item Must be multi-platform
+    \item Must generate correct code
+    \end{itemize}
+    Soft requirements
+    \begin{itemize}
+    \item Faster is better
+    \end{itemize}
+}
+
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{Native solutions}
+    \begin{tabular}{l|l|l|l}
+        & multi-platform & correctness & speed \\
+        \hline
+        P/Invoke &&&\\
+        hosted   &&&\\
+        generated DLL &&&\\
+    \end{tabular}
 }
 
 \subsection{}
