@@ -17,7 +17,7 @@
 \frame{
     \frametitle{Error handeling within the parser monad}
     \begin{multicols*}{3}
-    \section{Concat all the errors}
+    
     Concat all the errors
     \begin{enumerate}
     \item Slow
@@ -26,22 +26,20 @@
 
     \columnbreak
 
-    \section{Give only the last viable error.}
     Give only the last viable error
     \begin{enumerate}
     \item Fast
-    \item Posability to lose error information
-    \item Posability to get incorrect error information
+    \item posibility to lose error information
+    \item posibility to get incorrect error information
     \end{enumerate}
 
     \columnbreak
 
-    \section{Priority for errors}
     Priority for errorszz
     \begin{enumerate}
     \item Fast
     \item More accurate error information
-    \item Posability to get incorrect error information
+    \item posibility to get incorrect error information
     \end{enumerate}
     \end{multicols*}
 }
@@ -49,7 +47,70 @@
 \frame{
     \frametitle{Errors with priority}
     \begin{figure}
-
         \includegraphics{error_example}
     \end{figure}
+}
+
+\subsection{Order of the front-end}
+
+\frame{
+    \frametitle{Order of the front-end}
+    Parsing $\longrightarrow$ Type-checking $\longrightarrow$ Normalizing $\longrightarrow$ Back-end
+
+    Parsing $\longrightarrow$ Normalizing $\longrightarrow$ Type-checking  $\longrightarrow$ Back-end
+}
+
+\subsection{Moving functionality from the type-checker to the parser}
+
+\frame{
+    \frametitle{Moving functionality from the type-checker to the parser}
+    \begin{enumerate}
+    \item Identification of variable kind's
+    \item Identification of function names
+    \item Detection of partial application
+    \item Building an expresiontree within a sentence
+    \end{enumerate}
+
+}
+
+\subsubsection{Identification of variable kind's}
+
+\frame{
+    \frametitle{Identification of variable kind's}
+    Incorporating kind information in the syntax.
+    
+    \begin{itemize}
+    \item Incorporating kind information in the syntax.
+    \item Type has an apostrophe before its variable name. Example (‘a ,’generic, ‘type-variable)
+    
+    \item Kind has a sharp before its variable name. Example (\#kind, \#module, \#term, \#type)
+    \end{itemize}
+}
+
+\subsubsection{Identification of function names}
+
+\begin{frame}[fragile]
+    \frametitle{Identification of function names}
+    
+    \begin{lstlisting}
+    Func 'a -> "add" -> b' -> Tuple <'a 'b>
+    \end{lstlisting}
+
+    \begin{lstlisting}
+    Prs{
+        let! larg = parse_left_arg
+        let! name = check_string “add”
+        let! rarg = parse_right_arg
+        let! res = parse_result
+    }
+    \end{lstlisting}
+
+    Because all function have a declaration we can generate parsers specifically made to parse this one function definition. 
+
+\end{frame}
+
+\frame{
+    \frametitle{Detection of partial application}   
+    
+
 }
