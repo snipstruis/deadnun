@@ -1,17 +1,17 @@
-\section{Backend}
+\section{Back-end}
 
 \subsection{Code Generation}
 
-\frame{%
+\begin{frame}
     \frametitle{Goal}
     \begin{enumerate}
     \item generate executable code from the typechecked AST
     \item verify the correctness of the generated code 
     \item embed an interactive debugger in the executable
     \end{enumerate}
-}
+\end{frame}
 
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{The AST}
     \begin{itemize}
@@ -27,12 +27,12 @@
     \item All types are already inferenced and typechecked
     \item All generics are already reified/concrete
     \end{itemize}
-}
+\end{frame}
 
 
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
-    \framesubtitle{Output Language}
+    \framesubtitle{Requirements}
     Hard requirements
     \begin{itemize}
     \item Must inter-operate with .Net
@@ -43,9 +43,9 @@
     \begin{itemize}
     \item Faster is better
     \end{itemize}
-}
+\end{frame}
 
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Native solutions}
 
@@ -66,9 +66,9 @@
     \begin{itemize}
         \item None good enough
     \end{itemize}
-}
+\end{frame}
 
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Managed solutions}
 
@@ -89,35 +89,45 @@
     \begin{itemize}
         \item C\# is the best choice
     \end{itemize}
-}
+\end{frame}
 
-
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Mangler}
     \begin{itemize}
         \item Transforms valid Mc identifiers to valid C\# identifiers
     \end{itemize}
-}
+\end{frame}
 
-\frame{%
+\begin{frame}[fragile]
     \frametitle{\subsecname}
     \framesubtitle{Data structure generation}
-}
+    \begin{lstlisting}
+Data "Left"  -> string -> string | float
+Data "Right" -> float  -> string | float
+    \end{lstlisting}
+    
+    \begin{lstlisting}
+Class _pipe {};
+Class _Left :_pipe {string _arg0;};
+Class _Right:_pipe {float  _arg0;};
+    \end{lstlisting}
+\end{frame}
 
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Instruction generation}
-}
+\end{frame}
 
 \subsection{Verification}
-\frame{%
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{}
-}
+\end{frame}
 
 \subsection{Debugger}
-\frame{%
+
+\begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{}
-}
+\end{frame}
