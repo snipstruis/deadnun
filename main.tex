@@ -1,6 +1,15 @@
 \documentclass[xetex,mathserif,serif]{beamer}
 \usecolortheme{crane}
 
+\usepackage[at]{easylist}
+
+\AtBeginSubsection[] {%
+  \begin{frame}
+    %\frametitle{Roadmap}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
+
 \title{Metacasanova Mk3}
 \author{Louis \and Jarno \and Douwe}
 
