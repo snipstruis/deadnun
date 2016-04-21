@@ -48,13 +48,76 @@
 \frame{%
     \frametitle{\subsecname}
     \framesubtitle{Native solutions}
-    \begin{tabular}{l|l|l|l}
-        & multi-platform & correctness & speed \\
+
+    \begin{itemize}
+        \item Can use the fast LLVM C/C++ code generator
+        \item Requires hand-written garbage collector
+        \item May not have privileges on mobile platforms
+    \end{itemize}
+
+    \begin{tabular}{l|l|l}
+        & multi-platform & speed \\
         \hline
-        P/Invoke &&&\\
-        hosted   &&&\\
-        generated DLL &&&\\
+        P/Invoke      & on x86     & high overhead \\
+        hosted        & on windows & no high-speed JIT \\
+        generated DLL & on windows & very high overhead \\
     \end{tabular}
+
+    \begin{itemize}
+        \item None good enough
+    \end{itemize}
 }
 
-\subsection{}
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{Managed solutions}
+
+    \begin{itemize}
+        \item Higher reliability
+        \item Uses the fast .Net garbage collector
+    \end{itemize}
+
+    \begin{tabular}{l|l|l|l}
+        & multi-platform & speed & other\\
+        \hline
+        C++/CLI & on windows & fast & horrible in every way\\
+        CIL     & everywhere & fast & difficult to debug\\
+        F\#     & everywhere & slow & resists imperative code\\
+        C\#     & everywhere & fast & Most supported compiler\\
+    \end{tabular}
+
+    \begin{itemize}
+        \item C\# is the best choice
+    \end{itemize}
+}
+
+
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{Mangler}
+    \begin{itemize}
+        \item Transforms valid Mc identifiers to valid C\# identifiers
+    \end{itemize}
+}
+
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{Data structure generation}
+}
+
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{Instruction generation}
+}
+
+\subsection{Verification}
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{}
+}
+
+\subsection{Debugger}
+\frame{%
+    \frametitle{\subsecname}
+    \framesubtitle{}
+}
