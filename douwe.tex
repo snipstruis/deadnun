@@ -1,7 +1,6 @@
 \section{Back-end}
 
-\subsection{Code Generation}
-
+\subsection{Back-end}
 \begin{frame}
     \frametitle{Back-end}
     The backend is responsible for creating an executable
@@ -94,32 +93,53 @@
     \end{itemize}
 \end{frame}
 
+
+\subsection{Code Generation}
+
 \begin{frame}[fragile]
     \frametitle{\subsecname}
-    \framesubtitle{Mangler}
-    \begin{itemize}
-        \item Transforms valid Mc identifiers to valid C\# identifiers
-        \item The escape character is underscore
-        \item \verb/!/ becomes \verb/_bang/, \verb/|/ becomes \verb/_pipe/, \verb/_/ becomes \verb/_under/
-        \item C\# keywords are prefixed with @. @if, @int, etc.
-        \item Non-ascii symbols are converted to utf-8 NFD.\\
-              $\vcenter{\hbox{\includegraphics[height=1.5em]{snowman}}}$ becomes \verb/_E2_98_83/
-        \item Type information is also suffixed with \verb/_T/, \verb/_L/ and \verb/_R/.\\
-            (list(list int)) becomes \verb/_Llist_Llist_Tint_R_R/
-    \end{itemize}
+    \framesubtitle{Normalization}
+    \begin{multicols}{2}
+    \begin{lstlisting}
+
+
+-------------
+count [] -> 0
+
+
+
+
+
+
+
+count xs -> res
+--------------------
+count x::xs -> res+1
+    \end{lstlisting}
+    \columnbreak
+    \begin{lstlisting}
+_tmp0 -> []
+0 -> _tmp1
+--------------------
+count _tmp0 -> _tmp1
+
+_tmp0 -> x::xs
+count -> _tmp1
+_tmp1 xs -> res
+(+) -> _tmp2
+_tmp2 res -> _tmp3
+1 -> _tmp4
+_tmp3 _tmp4 -> _tmp5
+--------------------
+count _tmp0 -> _tmp5
+    \end{lstlisting}
+\end{multicols}
 \end{frame}
 
 \begin{frame}[fragile]
     \frametitle{\subsecname}
     \framesubtitle{Rule structure}
-    Normalized instructions.
     \begin{lstlisting}
--------------
-count [] -> 0
-
-count xs -> res
---------------------
-count x::xs -> res+1
     \end{lstlisting}
 \end{frame}
 
@@ -161,11 +181,21 @@ Class _Right:_pipe {float  _arg0;};
     \end{lstlisting}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[fragile]
     \frametitle{\subsecname}
-    \framesubtitle{Instruction generation}
-\end{frame}
+    \framesubtitle{Mangler}
+    \begin{itemize}
+        \item Transforms valid Mc identifiers to valid C\# identifiers
+        \item The escape character is underscore
+        \item \verb/!/ becomes \verb/_bang/, \verb/|/ becomes \verb/_pipe/, \verb/_/ becomes \verb/_under/
+        \item C\# keywords are prefixed with @. @if, @int, etc.
+        \item Non-ascii symbols are converted to utf-8 NFD.\\
+              $\vcenter{\hbox{\includegraphics[height=1.5em]{snowman}}}$ becomes \verb/_E2_98_83/
+        \item Type information is also suffixed with \verb/_T/, \verb/_L/ and \verb/_R/.\\
+            (list(list int)) becomes \verb/_Llist_Llist_Tint_R_R/
+    \end{itemize}
 
+\end{frame}
 \subsection{Verification}
 \begin{frame}
     \frametitle{\subsecname}
@@ -177,7 +207,9 @@ Class _Right:_pipe {float  _arg0;};
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{GUI}
-    pics of windows/linux here
+    \begin{figure}
+        \includegraphics[scale=0.5]{debugger}
+    \end{figure}
 \end{frame}
 
 \begin{frame}
