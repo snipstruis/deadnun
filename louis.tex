@@ -1,18 +1,22 @@
-\section{MC}
+\section{Intro}
 \subsection{Goal}
 \frame{%
    \frametitle{\subsecname}
-   why MC?
+   \framesubtitle{Why MC}
+   Complexity Casanova\\
+   MC is the solution
 }
 \frame{%
    \frametitle{\subsecname}
-   Goal of MC
+   \framesubtitle{Goal of MC}
+   MC adds abstraction\\
+   Implementing Casanova
 }
-
 
 \subsection{MC basics}
 \frame{%
    \frametitle{\subsecname}
+   \framesubtitle{Overview}
 
    \begin{itemize}
       \item Data
@@ -22,14 +26,52 @@
       \item Module
    \end{itemize}
 }
-\frame{%
+\begin{frame}[fragile]
    \frametitle{\subsecname}
-   show how bar and premises work
-}
-\frame{%
+   \framesubtitle{Data}
+
+   \begin{lstlisting}
+Data "Left"  -> string -> string | float
+Data "Right" -> float  -> string | float
+   \end{lstlisting}
+   Constructs and Deconstructs types
+\end{frame}
+\begin{frame}[fragile]
    \frametitle{\subsecname}
-   show how modules work
-}
+   \framesubtitle{Func}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Creates a runtime function
+\end{frame}
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{TypeFunc}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Creates a compile time function and is able to create kinds
+\end{frame}
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{TypeAlias}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Constructs and Deconstructs kinds
+\end{frame}
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{Module}
+
+   \begin{lstlisting}
+
+   \end{lstlisting}
+   Defines an interface
+\end{frame}
 
 \subsection{Usecases}
 \frame{%
@@ -42,13 +84,14 @@
 
 }
 
+\section{MC uses}
 \subsection{Monad Transformers}
 \subsubsection{Monads}
-\frame{%
-   explain mathematical
-   endofunctors
-   monoid
-}
+% \frame{%
+% explain mathematical
+% endofunctors
+% monoid
+% }
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{\subsubsecname}
