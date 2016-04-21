@@ -1,8 +1,7 @@
 *
 !.gitignore
-!main.tex
-!louis.tex
-!main.pdf
+!*.tex
+!*.pdf
 !Makefile
 !*/
 
