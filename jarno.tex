@@ -3,16 +3,81 @@
 \frame{
     \frametitle{Front-end}
     \framesubtitle{Overview}
-    \begin{enumerate}
-    \item Error handling within the parser monad
-    \item Order of the front-end
-    \item Moving functionality from the type-checker to the parser
-    \item Normalizing
-    \item Type-checking
-    \item Codegen interface
-    \end{enumerate}
+    \begin{itemize}
+    \item Expanding on the Parser Monad
+    \item Creating a front-end for the MC compiler
+    \item Creating a Type-Checker for the MC compiler
+    \end{itemize}
 }
-\subsection{Error handeling}
+
+\subsection{Expanding on the Parser Monand}
+
+\frame{
+    \frametitle{What is a parser monad?}
+    A parser monad is a abtraction that contains a list of elements and a context inside a maybe monad inside a state monad.
+
+    If the parser fails then instead of the context it will return an error.
+
+}
+
+\frame{
+    \frametitle{concat}
+    \begin{multicols*}{3}
+    \begin{enumerate}
+    \item t \item w \item o \item \# \item w \item o \item r \item d \item s \item \#
+    \end{enumerate}
+    \columnbreak
+    ch = get-char 
+    concat ch
+    \columnbreak
+    \begin{enumerate}
+    \item two\#words\#
+    \end{enumerate}
+    \end{multicols*}
+}
+\frame{
+    \frametitle{check char}
+    \begin{multicols*}{3}
+    \begin{enumerate}
+    \item t \item w \item o \item \# \item w \item o \item r \item d \item s \item \#
+    \end{enumerate}
+    \columnbreak
+    check-char \#
+    \columnbreak
+    \begin{enumerate}
+    \item nope \item nope \item nope \item yep \item nope \item nope \item nope \item nope \item nope \item yep
+    \end{enumerate}
+    \end{multicols*}
+}
+\frame{
+    \frametitle{until}
+    \begin{multicols*}{3}
+    \begin{enumerate}
+    \item t \item w \item o \item \# \item w \item o \item r \item d \item s \item \#
+    \end{enumerate}
+    \columnbreak
+    ch = get-char until check-char \#
+    
+    concat ch
+    \columnbreak
+    \begin{enumerate}
+    \item two \item words
+    \end{enumerate}
+    \end{multicols*}
+}
+
+\frame{
+    \frametitle{How to improve on it?}
+    You can not realy improve the parser monad itself however you can create new parser combinators.
+
+    \begin{itemize}
+    \item To manipulate the list and the context of the parser monad.
+    \item To make the parser repeat until a requirement is forfilled.
+    \item To Manipulate the error system inside the parser monad.
+    \end{itemize}
+
+    Something that can also be inproved is the error system that the parser monad uses.
+}
 
 \frame{
     \frametitle{Error handeling within the parser monad}
@@ -35,7 +100,7 @@
 
     \columnbreak
 
-    Priority for errorszz
+    Priority for errors
     \begin{enumerate}
     \item Fast
     \item More accurate error information
@@ -46,32 +111,48 @@
 
 \frame{
     \frametitle{Errors with priority}
+    The error with the highest priority is the one that gets returned.
     \begin{figure}
         \includegraphics{error_example}
     \end{figure}
 }
 
-
-\subsection{Moving functionality from the type-checker to the parser}
+\subsection{Creating a front-end for the MC compiler}
 
 \frame{
     \frametitle{Moving functionality from the type-checker to the parser}
+    
+    The parser monad allows for more features in the parser.
+
     \begin{enumerate}
-    \item Order of the front-end
+    \item Identification of function names in definitions
     \item Identification of variable kind's
-    \item Identification of function names
     \item Detection of partial application
     \item Building an expresiontree within a sentence
     \end{enumerate}
 
 }
 
-\frame{
-    \frametitle{Order of the front-end}
-    Parsing $\longrightarrow$ Type-checking $\longrightarrow$ Normalizing $\longrightarrow$ Back-end
+\begin{frame}[fragile]
+    \frametitle{Identification of function names}
+    
+    \begin{lstlisting}
+    Func 'a -> "add" -> 'b -> Tuple <'a 'b>
+    \end{lstlisting}
 
-    Parsing $\longrightarrow$ Normalizing $\longrightarrow$ Type-checking  $\longrightarrow$ Back-end
-}
+    \begin{lstlisting}
+    let definition_parser (decl) =
+      Prs{
+          let! larg = parse_left_arg decl.larg
+          let! name = check_string decl.name
+          let! rarg = parse_right_arg decl.rarg
+          let ret = decl.ret
+      }
+    \end{lstlisting}
+
+    Because all function have a declaration we can generate parsers specifically made to parse this one function definition. 
+
+\end{frame}
 
 \frame{
     \frametitle{Identification of variable kind's}
@@ -79,31 +160,12 @@
     
     \begin{itemize}
     \item Incorporating kind information in the syntax.
-    \item Type has an apostrophe before its variable name. Example (‘a ,’generic, ‘type-variable)
+    \item Type has an apostrophe before its variable name. Example (`a ,`generic, `type-variable)
     
-    \item Kind has a sharp before its variable name. Example (\#kind, \#module, \#term, \#type)
+    \item Kind has a hash before its variable name. Example (\#kind, \#module, \#term, \#type)
     \end{itemize}
 }
 
-\begin{frame}[fragile]
-    \frametitle{Identification of function names}
-    
-    \begin{lstlisting}
-    Func 'a -> "add" -> b' -> Tuple <'a 'b>
-    \end{lstlisting}
-
-    \begin{lstlisting}
-    Prs{
-        let! larg = parse_left_arg
-        let! name = check_string “add”
-        let! rarg = parse_right_arg
-        let! res = parse_result
-    }
-    \end{lstlisting}
-
-    Because all function have a declaration we can generate parsers specifically made to parse this one function definition. 
-
-\end{frame}
 
 \begin{frame}[fragile]
     \frametitle{Detection of partial application}   
@@ -111,12 +173,15 @@
     \begin{lstlisting}
     Func "add" -> int -> int -> int
     Func "foo" -> int -> int -> int
+    
     add -> a0
     a0 x -> a1
     a1 y -> res
     -------
     foo x y -> res
     \end{lstlisting}
+
+    Symbol table.
     \begin{lstlisting}
     a0 = int -> int -> int
     a1 = int -> int
@@ -125,3 +190,4 @@
 
 
 \end{frame}
+
