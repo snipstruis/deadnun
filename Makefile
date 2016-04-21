@@ -1,2 +1,2 @@
 all:
-	xelatex main # this
+	xelatex --interaction=nonstopmode --halt-on-error main 

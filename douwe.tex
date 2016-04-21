@@ -1,7 +1,9 @@
 \section{Backend}
 
+\subsection{Code Generation}
+
 \frame{%
-    \frametitle{\subsecname}
+    \frametitle{Goal}
     \begin{enumerate}
     \item generate executable code from the typechecked AST
     \item verify the correctness of the generated code 
@@ -9,9 +11,23 @@
     \end{enumerate}
 }
 
-\subsection{Code Generation}
-
 \frame{%
     \frametitle{\subsecname}
-    cg
+    \framesubtitle{The AST}
+    \begin{itemize}
+    \item The interface between the front-end and the back-end
+    \item Contains
+        \begin{itemize}
+        \item All the functions
+        \item All the data declarations
+        \item All the lambdas
+        \item The “main” function
+        \item The compiler flags
+        \end{itemize}
+    \item All types are already inferenced and typechecked
+    \item All generics are already reified. All types are concrete
+    \end{itemize}
 }
+
+
+\subsection{}
