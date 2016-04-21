@@ -5,13 +5,13 @@
 \usepackage{graphicx}
 \usepackage{listings}
 
-% \setcounter{tocdepth}{2}
-% \AtBeginSubsection[] {%
-  % \begin{frame}
-  % \frametitle{progres}
-    % \tableofcontents[currentsection,currentsubsection]
-  % \end{frame}
-% }
+\setcounter{tocdepth}{2}
+\AtBeginSubsection[] {%
+  \begin{frame}
+  \frametitle{progres}
+    \tableofcontents[currentsection,currentsubsection]
+  \end{frame}
+}
 
 \title{Metacasanova Mk3}
 \author{Louis \and Jarno \and Douwe}
@@ -29,7 +29,7 @@
         \framesubtitle{A bit more information about this}
     }
 
+    \include{louis}
     \include{jarno}
     \include{douwe}
-    \include{louis}
 \end{document}
