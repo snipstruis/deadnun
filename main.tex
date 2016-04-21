@@ -1,6 +1,14 @@
 \documentclass[xetex,mathserif,serif]{beamer}
 \usecolortheme{crane}
 
+\addtobeamertemplate{frametitle}{
+   \let\insertframetitle\insertsubsectionhead}{}
+
+\makeatletter
+  \CheckCommand*\beamer@checkframetitle{\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+  \renewcommand*\beamer@checkframetitle{\global\let\beamer@frametitle\relax\@ifnextchar\bgroup\beamer@inlineframetitle{}}
+\makeatother
+
 \usepackage[at]{easylist}
 
 \AtBeginSubsection[] {%
@@ -26,7 +34,10 @@
         \framesubtitle{A bit more information about this}
     }
 
+    \section{Louis}
     \include{louis}
+    \section{Douwe}
     \include{douwe}
+    \section{Jarno}
     \include{jarno}
 \end{document}
