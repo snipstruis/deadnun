@@ -3,7 +3,7 @@
 \subsection{Code Generation}
 
 \begin{frame}
-    \frametitle{Goal}
+    \frametitle{Goals}
     \begin{enumerate}
     \item generate executable code from the typechecked AST
     \item verify the correctness of the generated code 
@@ -114,6 +114,29 @@ Class _Right:_pipe {float  _arg0;};
     \end{lstlisting}
 \end{frame}
 
+\begin{frame}[fragile]
+    \frametitle{\subsecname}
+    \framesubtitle{Func structure}
+    \begin{lstlisting}
+Class MyFunc {
+    <function arguments>
+    public <return type> run() {
+        {
+            <rule 1 implementation>
+            return <local>;
+        }
+      skip1:
+        {
+            <rule 2 implementation>
+            return <local>;
+        }
+      skip2:
+        throw exception
+    }
+};
+    \end{lstlisting}
+\end{frame}
+
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Instruction generation}
@@ -122,12 +145,29 @@ Class _Right:_pipe {float  _arg0;};
 \subsection{Verification}
 \begin{frame}
     \frametitle{\subsecname}
-    \framesubtitle{}
+    \framesubtitle{interpreter}
 \end{frame}
 
 \subsection{Debugger}
 
 \begin{frame}
     \frametitle{\subsecname}
-    \framesubtitle{}
+    \framesubtitle{GUI}
+    pics of windows/linux here
 \end{frame}
+
+\begin{frame}
+    \frametitle{\subsecname}
+    \framesubtitle{program tree}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\subsecname}
+    \framesubtitle{break points}
+\end{frame}
+
+\begin{frame}
+    \frametitle{\subsecname}
+    \framesubtitle{Local definitions}
+\end{frame}
+
