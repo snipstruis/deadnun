@@ -67,8 +67,8 @@
         \hline
         C++/CLI & on windows & fast & horrible in every way\\
         F\#     & everywhere & slow & resists imperative code\\
-        CIL     & everywhere & fast & difficult to debug\\
         C\#     & everywhere & fast & Most supported compiler\\
+        CIL     & everywhere & fast & difficult to debug\\
     \end{tabular}
 
     \begin{itemize}
@@ -147,7 +147,9 @@ Class _pipe {};
 Class _Left :_pipe {string _arg0;};
 Class _Right:_pipe {float  _arg0;};
     \end{lstlisting}
+\verb/_pipe/ class is downcasted to one of its constructors.
 \end{frame}
+
 
 \begin{frame}[fragile]
     \frametitle{\subsecname}
@@ -183,21 +185,6 @@ Class _Right:_pipe {float  _arg0;};
     \begin{figure}
         \includegraphics[scale=0.5]{debugger}
     \end{figure}
-\end{frame}
-
-\begin{frame}
-    \frametitle{\subsecname}
-    \framesubtitle{program tree}
-    File
-    \begin{itemize}
-        \item Func
-        \begin{itemize}
-            \item Rule
-            \begin{itemize}
-                \item Premise
-            \end{itemize}
-        \end{itemize}
-    \end{itemize}
 \end{frame}
 
 \begin{frame}
