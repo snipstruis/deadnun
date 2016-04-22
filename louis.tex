@@ -3,14 +3,17 @@
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{Why MC}
-   Complexity Casanova\\
+   Complexity compiler Casanova\\
    MC is the solution
 }
 \frame{%
    \frametitle{\subsecname}
    \framesubtitle{Goal of MC}
    MC adds abstraction\\
-   Implementing Casanova
+   \begin{itemize}
+      \item Implementing compiler Casanova
+      \item Teaching
+   \end{itemize}
 }
 
 \subsection{MC basics}
@@ -37,12 +40,15 @@ Data "Right" -> float  -> string | float
    \framesubtitle{Func}
 
    \begin{lstlisting}
-Func "foo" -> int -> int -> int
+Func "foo" -> Bool -> Int -> Int -> Int
 
-add a b -> c
-mul c b -> res
-------------
-foo a b -> res
+add b c -> res
+---------------
+foo True b c-> res
+
+mul b c -> res
+---------------
+foo False b c-> res
    \end{lstlisting}
    Creates a runtime function
 \end{frame}
@@ -52,8 +58,12 @@ foo a b -> res
    \framesubtitle{TypeFunc}
 
    \begin{lstlisting}
-TypeFunc "bar" =>
+TypeFunc "bar" => (String * Int) => (Int * String)
 
+a => (c * d)
+(d * c) => res
+---------------
+bar a => res
    \end{lstlisting}
    Creates a compile time function and is able to create kinds
 \end{frame}
