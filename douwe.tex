@@ -93,54 +93,22 @@
     \end{itemize}
 \end{frame}
 
-
 \subsection{Code Generation}
 
 \begin{frame}[fragile]
     \frametitle{\subsecname}
-    \framesubtitle{Normalization}
-    \begin{multicols}{2}
-    \begin{lstlisting}
-
-
--------------
-count [] -> 0
-
-
-
-
-
-
-
-count xs -> res
---------------------
-count x::xs -> res+1
-    \end{lstlisting}
-    \columnbreak
-    \begin{lstlisting}
-_tmp0 -> []
-0 -> _tmp1
---------------------
-count _tmp0 -> _tmp1
-
-_tmp0 -> x::xs
-count -> _tmp1
-_tmp1 xs -> res
-(+) -> _tmp2
-_tmp2 res -> _tmp3
-1 -> _tmp4
-_tmp3 _tmp4 -> _tmp5
---------------------
-count _tmp0 -> _tmp5
-    \end{lstlisting}
-\end{multicols}
-\end{frame}
-
-\begin{frame}[fragile]
-    \frametitle{\subsecname}
     \framesubtitle{Rule structure}
-    \begin{lstlisting}
-    \end{lstlisting}
+    Structure:
+    \begin{enumerate}
+        \item input value
+        \item output value
+        \item list of instructions
+    \end{enumerate}
+    Some instructions pattern-match:
+    \begin{enumerate}
+        \item deconstructors (a->[] or a->x::xs)
+        \item conditionals (x<20)
+    \end{enumerate}
 \end{frame}
 
 \begin{frame}[fragile]
@@ -188,18 +156,23 @@ Class _Right:_pipe {float  _arg0;};
         \item Transforms valid Mc identifiers to valid C\# identifiers
         \item The escape character is underscore
         \item \verb/!/ becomes \verb/_bang/, \verb/|/ becomes \verb/_pipe/, \verb/_/ becomes \verb/_under/
-        \item C\# keywords are prefixed with @. @if, @int, etc.
         \item Non-ascii symbols are converted to utf-8 NFD.\\
               $\vcenter{\hbox{\includegraphics[height=1.5em]{snowman}}}$ becomes \verb/_E2_98_83/
+        \item C\# keywords are prefixed with @. @if, @int, etc.
         \item Type information is also suffixed with \verb/_T/, \verb/_L/ and \verb/_R/.\\
             (list(list int)) becomes \verb/_Llist_Llist_Tint_R_R/
     \end{itemize}
-
 \end{frame}
+
 \subsection{Verification}
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{interpreter}
+    \begin{itemize}
+        \item Made a simple interpreter
+        \item easily verifiable
+        \item same output on same input
+    \end{itemize}
 \end{frame}
 
 \subsection{Debugger}
@@ -215,15 +188,34 @@ Class _Right:_pipe {float  _arg0;};
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{program tree}
+    File
+    \begin{itemize}
+        \item Func
+        \begin{itemize}
+            \item Rule
+            \begin{itemize}
+                \item Premise
+            \end{itemize}
+        \end{itemize}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{break points}
+    \begin{itemize}
+        \item Every line of source-code has a corresponding breakpoint
+        \item breakpoints implemented by blocking function call
+    \end{itemize}
 \end{frame}
 
 \begin{frame}
     \frametitle{\subsecname}
     \framesubtitle{Local definitions}
+    \begin{itemize}
+        \item Every premise that defines a value records the name and value to a dictionary
+        \item Dictionary is passed to debugger on breakpoint
+    \end{itemize}
+    
 \end{frame}
 
