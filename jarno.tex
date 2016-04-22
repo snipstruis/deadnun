@@ -139,6 +139,7 @@
 \begin{frame}[fragile]
     \frametitle{Identification of function names}
 
+    Because all function have a declaration we can generate parsers specifically made to parse this one function definition.
     \begin{lstlisting}
     Func 'a -> "add" -> 'b -> Tuple <'a 'b>
     \end{lstlisting}
@@ -152,9 +153,6 @@
           let ret = decl.ret
       }
     \end{lstlisting}
-
-    Because all function have a declaration we can generate parsers specifically made to parse this one function definition.
-
 \end{frame}
 
 \frame{
@@ -195,7 +193,6 @@
 \end{frame}
 
 \subsection{Normalizing and Type-checking}
-
 \frame{
     \frametitle{Normalizing before type-checking}
     Because of the more precise syntax tree that the parser generates we can start the normalization procces sooner.
