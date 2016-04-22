@@ -10,7 +10,7 @@
     \frametitle{Goals}
     \begin{enumerate}
     \item generate executable code from the typechecked AST
-    \item verify the correctness of the generated code 
+    \item verify the correctness of the generated code
     \item embed an interactive debugger in the executable
     \end{enumerate}
 \end{frame}
@@ -141,7 +141,7 @@ Class MyFunc {
 Data "Left"  -> string -> string | float
 Data "Right" -> float  -> string | float
     \end{lstlisting}
-    
+
     \begin{lstlisting}
 Class _pipe {};
 Class _Left :_pipe {string _arg0;};
@@ -153,7 +153,7 @@ Class _Right:_pipe {float  _arg0;};
     \frametitle{\subsecname}
     \framesubtitle{Mangler}
     \begin{itemize}
-        \item Transforms valid Mc identifiers to valid C\# identifiers
+        \item Transforms valid MC identifiers to valid C\# identifiers
         \item The escape character is underscore
         \item \verb/!/ becomes \verb/_bang/, \verb/|/ becomes \verb/_pipe/, \verb/_/ becomes \verb/_under/
         \item Non-ascii symbols are converted to utf-8 NFD.\\
@@ -216,6 +216,6 @@ Class _Right:_pipe {float  _arg0;};
         \item Every premise that defines a value records the name and value to a dictionary
         \item Dictionary is passed to debugger on breakpoint
     \end{itemize}
-    
+
 \end{frame}
 
