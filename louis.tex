@@ -17,28 +17,12 @@
 }
 
 \subsection{MC basics}
-\frame{%
-   \frametitle{\subsecname}
-   \framesubtitle{Overview}
-
-   Kewords and basic syntax
-}
-
-\begin{frame}[fragile]
-   \frametitle{\subsecname}
-   \framesubtitle{Data}
-
-   \begin{lstlisting}
-Data "Left"  -> string -> string | float
-Data "Right" -> float  -> string | float
-   \end{lstlisting}
-   Constructs and Deconstructs types
-\end{frame}
 
 \begin{frame}[fragile]
    \frametitle{\subsecname}
    \framesubtitle{Func}
 
+   Creates a runtime function
    \begin{lstlisting}
 Func "foo" -> Bool -> Int -> Int -> Int
 
@@ -50,32 +34,39 @@ mul b c -> res
 ---------------
 foo False b c -> res
    \end{lstlisting}
-   Creates a runtime function
+\end{frame}
+
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{Data}
+
+   Constructs and Deconstructs types
+   \begin{lstlisting}
+Data "Left"  -> string -> string | float
+Data "Right" -> float  -> string | float
+   \end{lstlisting}
 \end{frame}
 
 \begin{frame}[fragile]
    \frametitle{\subsecname}
    \framesubtitle{TypeFunc}
 
+   Creates a compile time function and is able to create kinds
    \begin{lstlisting}
-TypeFunc "bar" => (String * Int) => (Int * String)
+TypeFunc "bar" => * => *
 
 a => (c * d)
 (d * c) => res
 ---------------
 bar a => res
    \end{lstlisting}
-   Creates a compile time function and is able to create kinds
 \end{frame}
 
 \begin{frame}[fragile]
    \frametitle{\subsecname}
    \framesubtitle{TypeAlias}
 
-   \begin{lstlisting}
-TypeAlias "StateT" => (#a => #b) => #c => #d => #e
-StateT 'M 's 'a => ('s -> 'M('a * 's))
-   \end{lstlisting}
+   The same as Data
    Constructs and Deconstructs kinds
 \end{frame}
 
@@ -83,25 +74,15 @@ StateT 'M 's 'a => ('s -> 'M('a * 's))
    \frametitle{\subsecname}
    \framesubtitle{Module}
 
+   Defines an interface
    \begin{lstlisting}
-TypeFunc "MonoidMul" => #a => Module
-MonoidMul 'a => Module {
+TypeFunc "MonoidAdd" => #a => Module
+MonoidAdd 'a => Module {
   Func 'a -> "+" -> 'a -> 'a
   Func "identityAdd" -> 'a
 }
    \end{lstlisting}
-   Defines an interface
 \end{frame}
-
-\subsection{Usecases in short}
-\frame{%
-   \frametitle{\subsecname}
-   \begin{itemize}
-      \item Highlevel abstractions
-      \item Complex structures
-      \item Freedom with control
-   \end{itemize}
-}
 
 \section{MC standardlibrary}
 \subsection{Monad Transformers}
@@ -205,7 +186,7 @@ Id 'a => 'a
 
 TypeFunc "id" => Monad
 id => Monad(Id) {
-  x >>= k -> k x
+  bind x k -> k x
   return x -> x
 }
    \end{lstlisting}
@@ -218,6 +199,7 @@ id => Monad(Id) {
       \item Map or Key-Value list
       \item Inlined on Compile time
       \item Type safe
+      \item Not built in
    \end{itemize}
 }
 
@@ -232,7 +214,7 @@ id => Monad(Id) {
             \item Update
             \item Apply
          \end{itemize}
-      \item State machine
+      \item Not built in
    \end{itemize}
 }
 
@@ -251,8 +233,8 @@ id => Monad(Id) {
    \frametitle{\subsecname}
    \begin{enumerate}
       \item Inlined on Compile time
-      \item haha
       \item Full power of mutable records
+      \item State machine
    \end{enumerate}
 
 }
