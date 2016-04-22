@@ -14,7 +14,7 @@
 
 \frame{
     \frametitle{What is a parser monad?}
-    A parser monad is a abstraction that contains a list of elements and a context inside a maybe monad inside a state monad.
+    A parser monad iterates over a list and builds a output structure.
 
     If the parser fails then instead of the context it will return an error.
 }
@@ -202,8 +202,29 @@
     Normalizing before type-checking also means that the type-checker can be further simplefied.
 }
 
+\frame{
+    \frametitle{Normalization}
+    During normalization the premises get expanded to premises with a single instruction.
+}
+
 \begin{frame}[fragile]
-    \frametitle{Single asignments}
+    \frametitle{Normalization of data matching}
+    Here we have a function with a data constructor and deconstructor.
+    \begin{lstlisting}
+    foo x::xs -> x,xs
+    \end{lstlisting}
+    During normalization the deconstructor that the rule matches on gets moved to the premises.
+    And the constructor in the result also gets moved to the premises.
+    \begin{lstlisting}
+    _tmp0 -> x::xs
+    x,xs  -> _tmp1
+    -------
+    foo _tmp0 -> _tmp1
+    \end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+    \frametitle{Single instructures}
     When multiple expresions are in the same sentence type-checking can become complex.
     \begin{lstlisting}
         add (sub (mul 1 x) 2) 3 -> res
