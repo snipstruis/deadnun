@@ -1,23 +1,22 @@
 \section{Front-end}
 
+\subsection{Expanding on the Parser Monand}
+
 \frame{
-    \frametitle{Front-end}
+    \frametitle{Goals}
     \framesubtitle{Overview}
     \begin{itemize}
     \item Expanding on the Parser Monad
     \item Creating a front-end for the MC compiler
-    \item Creating a Type-Checker for the MC compiler
+    \item Type-checking and normalizing
     \end{itemize}
 }
 
-\subsection{Expanding on the Parser Monand}
-
 \frame{
     \frametitle{What is a parser monad?}
-    A parser monad is a abtraction that contains a list of elements and a context inside a maybe monad inside a state monad.
+    A parser monad is a abstraction that contains a list of elements and a context inside a maybe monad inside a state monad.
 
     If the parser fails then instead of the context it will return an error.
-
 }
 
 \frame{
@@ -120,15 +119,19 @@
 \subsection{Creating a front-end for the MC compiler}
 
 \frame{
+    \frametitle{Front-end}
+    The front-end takes the source files and converts the code inside into an AST that can be type-checked and then used by the back-end.
+
+}
+
+\frame{
     \frametitle{Moving functionality from the type-checker to the parser}
     
     The parser monad allows for more features in the parser.
 
     \begin{enumerate}
-    \item Identification of function names in definitions
-    \item Identification of variable kind's
-    \item Detection of partial application
-    \item Building an expresiontree within a sentence
+    \item More detailed syntax tree
+    \item Semi type-checking
     \end{enumerate}
 
 }
@@ -169,7 +172,9 @@
 
 \begin{frame}[fragile]
     \frametitle{Detection of partial application}   
-    
+    The parser knows all the arguments of a function and can thus see when arguments are missing.
+    A symbol table can be generated for all the variables used inside the rule.
+
     \begin{lstlisting}
     Func "add" -> int -> int -> int
     Func "foo" -> int -> int -> int
@@ -187,7 +192,10 @@
     a1 = int -> int
     res = int
     \end{lstlisting}
-
-
 \end{frame}
 
+\subsection{normalizing and Type-checking}
+
+\frame{
+    \frametitle{}
+}
