@@ -43,7 +43,12 @@ Data "Right" -> float  -> string | float
    \framesubtitle{Func}
 
    \begin{lstlisting}
+Func "foo" -> int -> int -> int
 
+add a b -> c
+mul c b -> res
+------------
+foo a b -> res
    \end{lstlisting}
    Creates a runtime function
 \end{frame}
@@ -63,7 +68,8 @@ Data "Right" -> float  -> string | float
    \framesubtitle{TypeAlias}
 
    \begin{lstlisting}
-
+TypeAlias "StateT" => (#a => #b) => #c => #d => #e
+StateT 'M 's 'a => ('s -> 'M('a * 's))
    \end{lstlisting}
    Constructs and Deconstructs kinds
 \end{frame}
@@ -107,11 +113,48 @@ Data "Right" -> float  -> string | float
             \item Container-like
             \item Two functions
          \end{itemize}
-      \item Different Monads
-         \begin{itemize}
-            \item State
-            \item Maybe
-         \end{itemize}
+   \end{itemize}
+}
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+   The return function
+
+   \begin{figure}
+      \includegraphics{return}
+   \end{figure}
+}
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+   The bind function\\
+   Step 1
+
+   \begin{figure}
+      \includegraphics{bind1}
+   \end{figure}
+}
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+   The bind function\\
+   Step 2
+
+   \begin{figure}
+      \includegraphics{bind2}
+   \end{figure}
+}
+
+\frame{%
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+   Different Monads
+   \begin{itemize}
+      \item State
+      \item Maybe
    \end{itemize}
 }
 
@@ -130,23 +173,42 @@ Data "Right" -> float  -> string | float
 }
 
 \subsubsection{Transformers}
-\frame{%
+   \frame{%
    \frametitle{\subsecname}
    \framesubtitle{\subsubsecname}
+
+   \begin{figure}
+      \includegraphics{transformers}
+   \end{figure}
 
    \begin{itemize}
       \item Automatically combines monads
       \item Id monad
    \end{itemize}
 }
+\begin{frame}[fragile]
+   \frametitle{\subsecname}
+   \framesubtitle{\subsubsecname}
+   Id monad
+   \begin{lstlisting}
+TypeAlias "Id" => #a => #b
+Id 'a => 'a
+
+TypeFunc "id" => Monad
+id => Monad(Id) {
+  x >>= k -> k x
+  return x -> x
+}
+   \end{lstlisting}
+\end{frame}
 
 \subsection{Records}
 \frame{%
    \frametitle{\subsecname}
    \begin{itemize}
-      \item Why
-      \item List like
-      \item Type information
+      \item Map or Key-Value list
+      \item Inlined on Compile time
+      \item Type safe
    \end{itemize}
 }
 
@@ -155,29 +217,33 @@ Data "Right" -> float  -> string | float
    \frametitle{\subsecname}
 
    \begin{itemize}
-      \item Compile time
-      \item Rule
+      \item Inlined on Compile time
+      \item Functions
          \begin{itemize}
             \item Update
             \item Apply
          \end{itemize}
+      \item State machine
    \end{itemize}
 }
+
 \frame{%
    \frametitle{\subsecname}
    Consequences in use:
    \begin{itemize}
-      \item structure is bypassed
+      \item Structure is bypassed
+      \item Faster code
+      \item Full power of mutables
    \end{itemize}
 }
+
 \subsection{Updatable Records}
 \frame{%
    \frametitle{\subsecname}
    \begin{enumerate}
-      \item Compile time
-         \begin{itemize}
-            \item haha
-         \end{itemize}
+      \item Inlined on Compile time
+      \item haha
+      \item Full power of mutable records
    \end{enumerate}
 
 }
