@@ -26,7 +26,7 @@
     \item t \item w \item o \item \# \item w \item o \item r \item d \item s \item \#
     \end{enumerate}
     \columnbreak
-    ch = get-char 
+    ch = get-char
     concat ch
     \columnbreak
     \begin{enumerate}
@@ -56,7 +56,7 @@
     \end{enumerate}
     \columnbreak
     ch = get-char until check-char \#
-    
+
     concat ch
     \columnbreak
     \begin{enumerate}
@@ -81,7 +81,7 @@
 \frame{
     \frametitle{Error handling within the parser monad}
     \begin{multicols*}{3}
-    
+
     Concat all the errors
     \begin{enumerate}
     \item Slow
@@ -126,7 +126,7 @@
 
 \frame{
     \frametitle{Moving functionality from the type-checker to the parser}
-    
+
     The parser monad allows for more features in the parser.
 
     \begin{enumerate}
@@ -138,7 +138,7 @@
 
 \begin{frame}[fragile]
     \frametitle{Identification of function names}
-    
+
     \begin{lstlisting}
     Func 'a -> "add" -> 'b -> Tuple <'a 'b>
     \end{lstlisting}
@@ -153,36 +153,36 @@
       }
     \end{lstlisting}
 
-    Because all function have a declaration we can generate parsers specifically made to parse this one function definition. 
+    Because all function have a declaration we can generate parsers specifically made to parse this one function definition.
 
 \end{frame}
 
 \frame{
-    \frametitle{Identification of variable kind's}
+    \frametitle{Identification of variable kinds}
     Incorporating kind information in the syntax.
-    
+
     \begin{itemize}
     \item Incorporating kind information in the syntax.
-    \item Type has an apostrophe before its variable name. Example (`a ,`generic, `type-variable)
-    
+    \item Type has an apostrophe before its variable name. Example (`a, `generic, `type-variable)
+
     \item Kind has a hash before its variable name. Example (\#kind, \#module, \#term, \#type)
     \end{itemize}
 }
 
 
 \begin{frame}[fragile]
-    \frametitle{Detection of partial application}   
+    \frametitle{Detection of partial application}
     The parser knows all the arguments of a function and can thus see when arguments are missing.
     A symbol table can be generated for all the variables used inside the rule.
 
     \begin{lstlisting}
     Func "add" -> int -> int -> int
     Func "foo" -> int -> int -> int
-    
+
     add -> a0
     a0 x -> a1
     a1 y -> res
-    -------
+    -------------
     foo x y -> res
     \end{lstlisting}
 
@@ -194,12 +194,12 @@
     \end{lstlisting}
 \end{frame}
 
-\subsection{normalizing and Type-checking}
+\subsection{Normalizing and Type-checking}
 
 \frame{
     \frametitle{Normalizing before type-checking}
     Because of the more precise syntax tree that the parser generates we can start the normalization procces sooner.
-    Normalizing before type-checking also means that the type-checker can be further simplefied.
+    Normalizing before type-checking also means that the type-checker can be further simplified.
 }
 
 \frame{
@@ -218,7 +218,7 @@
     \begin{lstlisting}
     _tmp0 -> x::xs
     x,xs  -> _tmp1
-    -------
+    ------------------
     foo _tmp0 -> _tmp1
     \end{lstlisting}
 \end{frame}
@@ -228,7 +228,7 @@
     When multiple expresions are in the same sentence type-checking can become complex.
     \begin{lstlisting}
         add (sub (mul 1 x) 2) 3 -> res
-        -----
+        -------------------------------
         foo x -> res
     \end{lstlisting}
     However if you split the sentance into multiple parts.
@@ -236,7 +236,7 @@
         mul 1 x -> _tmp0
         sub _tmp0 2 -> _tmp1
         add _tmp1 3 -> res
-        -------
+        --------------------
         foo x -> res
     \end{lstlisting}
     Now that the sentance is simplefied into multiple applications the complexety is moved from analyzing type signatures to building a symbol table.
@@ -247,14 +247,14 @@
     If you write the complete signature of the sentance you will get this.
     \begin{lstlisting}
     add (sub (mul 1 x) 2) 3 -> res
-    -----
+    ------------------------------
     foo x -> res
     \end{lstlisting}
     \begin{lstlisting}
 int -> int -> int (int -> int -> int (
     int -> int -> int int int) int) int
------
-int -> int  
+---------------------------------------
+int -> int
     \end{lstlisting}
 \end{frame}
 
@@ -265,19 +265,19 @@ int -> int
         mul 1 x -> _tmp0
         sub _tmp0 2 -> _tmp1
         add _tmp1 3 -> res
-        -------
+        -------------------
         foo x -> res
     \end{lstlisting}
     \begin{lstlisting}
         int -> int -> int
         int -> int -> int
         int -> int -> int
-        -----
+        -----------------
         int -> int
     \end{lstlisting}
     Simpler to check because now all the types are bound to a variable name and we can just iterate over the premises.
     \begin{lstlisting}
         x     = int | _tmp0 = int
         _tmp1 = int | res   = int
-    \end{lstlisting} 
+    \end{lstlisting}
 \end{frame}
