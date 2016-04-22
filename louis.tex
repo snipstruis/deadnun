@@ -58,6 +58,7 @@ foo a b -> res
    \framesubtitle{TypeFunc}
 
    \begin{lstlisting}
+TypeFunc "bar" =>
 
    \end{lstlisting}
    Creates a compile time function and is able to create kinds
@@ -79,7 +80,11 @@ StateT 'M 's 'a => ('s -> 'M('a * 's))
    \framesubtitle{Module}
 
    \begin{lstlisting}
-
+TypeFunc "MonoidMul" => #a => Module
+MonoidMul 'a => Module {
+  Func 'a -> "+" -> 'a -> 'a
+  Func "identityAdd" -> 'a
+}
    \end{lstlisting}
    Defines an interface
 \end{frame}
@@ -122,7 +127,7 @@ StateT 'M 's 'a => ('s -> 'M('a * 's))
    The return function
 
    \begin{figure}
-      \includegraphics{return}
+      \includegraphics[width=\textwidth]{return}
    \end{figure}
 }
 
@@ -133,7 +138,7 @@ StateT 'M 's 'a => ('s -> 'M('a * 's))
    Step 1
 
    \begin{figure}
-      \includegraphics{bind1}
+      \includegraphics[width=\textwidth]{bind1}
    \end{figure}
 }
 
@@ -144,7 +149,7 @@ StateT 'M 's 'a => ('s -> 'M('a * 's))
    Step 2
 
    \begin{figure}
-      \includegraphics{bind2}
+      \includegraphics[width=\textwidth]{bind2}
    \end{figure}
 }
 
